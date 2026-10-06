@@ -30,7 +30,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   };
 
   return (
-    <div className="bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border dark:shadow-glass-card shadow-subtle-light rounded-lg p-5 flex flex-col justify-between hover:border-neutral-300 dark:hover:border-white/15">
+    <div className="bg-light-card dark:bg-white/[0.035] backdrop-blur-xs border border-light-border dark:border-white/[0.08] dark:shadow-glass-card shadow-subtle-light rounded-lg p-5 flex flex-col justify-between hover:border-neutral-300 dark:hover:border-white/[0.14]">
       <div>
         <div className="mb-2.5">
           <TaskStatusIndicator status={task.status} priority={task.priority} />
@@ -45,7 +45,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         </p>
       </div>
 
-      <div className="pt-3 border-t border-light-border dark:border-dark-border/60 mt-1">
+      <div className="pt-3 border-t border-light-border/60 dark:border-white/[0.04] mt-1">
         <div className="flex items-center justify-between text-[11px] text-light-muted dark:text-dark-muted mb-3">
           <span>Due {formatDate(task.dueDate)}</span>
           <span>Created {formatDate(task.createdAt)}</span>

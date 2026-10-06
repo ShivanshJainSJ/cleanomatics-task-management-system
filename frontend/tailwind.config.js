@@ -36,7 +36,7 @@ module.exports = {
       },
       boxShadow: {
         'glass-dark': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 2px 8px rgba(0, 0, 0, 0.4)',
-        'glass-card': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.04)',
+        'glass-card': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.25)',
         'subtle-light': '0 1px 3px rgba(0, 0, 0, 0.05)',
       },
     },
