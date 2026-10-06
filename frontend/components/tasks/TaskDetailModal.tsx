@@ -20,7 +20,7 @@ export const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
   onEdit,
   onDelete,
 }) => {
-  if (!task) return null;
+  if (!isOpen || !task) return null;
 
   const formatDate = (isoString: string) => {
     try {

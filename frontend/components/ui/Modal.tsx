@@ -45,12 +45,12 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4 text-center">
         <div
-          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-slate-900/50 transition-opacity"
           onClick={onClose}
         />
 
         <div
-          className={`w-full ${maxWidthClasses[maxWidth]} transform overflow-hidden rounded-xl bg-white dark:bg-slate-900 p-6 text-left align-middle shadow-xl transition-all border border-slate-200 dark:border-slate-800 z-10`}
+          className={`w-full ${maxWidthClasses[maxWidth]} transform overflow-hidden rounded-lg bg-white dark:bg-slate-900 p-6 text-left align-middle shadow-lg transition-all border border-slate-200 dark:border-slate-800 z-10`}
         >
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">

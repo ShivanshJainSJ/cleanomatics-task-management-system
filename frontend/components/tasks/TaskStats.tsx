@@ -46,16 +46,16 @@ export const TaskStats: React.FC<TaskStatsProps> = ({ tasks }) => {
         return (
           <div
             key={stat.name}
-            className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs flex items-center space-x-3"
+            className="p-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center space-x-3"
           >
-            <div className={`p-2.5 rounded-lg ${stat.color}`}>
-              <Icon className="w-5 h-5" />
+            <div className={`p-2 rounded-md ${stat.color}`}>
+              <Icon className="w-4 h-4" />
             </div>
             <div>
               <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 {stat.name}
               </p>
-              <p className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              <p className="text-lg font-bold text-slate-900 dark:text-slate-100">
                 {stat.value}
               </p>
             </div>

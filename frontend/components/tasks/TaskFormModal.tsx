@@ -18,6 +18,8 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
   onSubmit,
   taskToEdit,
 }) => {
+  if (!isOpen) return null;
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState<TaskStatus>('pending');

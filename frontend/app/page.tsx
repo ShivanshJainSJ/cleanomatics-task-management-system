@@ -48,22 +48,34 @@ export default function Home() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
 
-  const handleOpenCreate = () => {
+  const closeAllModals = () => {
+    setIsFormModalOpen(false);
+    setIsDetailModalOpen(false);
+    setIsDeleteModalOpen(false);
     setTaskToEdit(null);
+    setSelectedTask(null);
+    setTaskToDelete(null);
+  };
+
+  const handleOpenCreate = () => {
+    closeAllModals();
     setIsFormModalOpen(true);
   };
 
   const handleOpenEdit = (task: Task) => {
+    closeAllModals();
     setTaskToEdit(task);
     setIsFormModalOpen(true);
   };
 
   const handleOpenDetail = (task: Task) => {
+    closeAllModals();
     setSelectedTask(task);
     setIsDetailModalOpen(true);
   };
 
   const handleOpenDelete = (task: Task) => {
+    closeAllModals();
     setTaskToDelete(task);
     setIsDeleteModalOpen(true);
   };
@@ -114,7 +126,7 @@ export default function Home() {
 
       <TaskFormModal
         isOpen={isFormModalOpen}
-        onClose={() => setIsFormModalOpen(false)}
+        onClose={closeAllModals}
         taskToEdit={taskToEdit}
         onSubmit={async (payload) => {
           if (taskToEdit) {
@@ -127,7 +139,7 @@ export default function Home() {
 
       <TaskDetailModal
         isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
+        onClose={closeAllModals}
         task={selectedTask}
         onEdit={handleOpenEdit}
         onDelete={handleOpenDelete}
@@ -135,7 +147,7 @@ export default function Home() {
 
       <TaskDeleteModal
         isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
+        onClose={closeAllModals}
         task={taskToDelete}
         onConfirm={async (id) => {
           return await deleteTask(id);

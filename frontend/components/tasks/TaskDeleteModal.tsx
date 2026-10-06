@@ -19,7 +19,7 @@ export const TaskDeleteModal: React.FC<TaskDeleteModalProps> = ({
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
-  if (!task) return null;
+  if (!isOpen || !task) return null;
 
   const handleDelete = async () => {
     setIsDeleting(true);
