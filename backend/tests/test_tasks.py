@@ -10,7 +10,7 @@ def test_get_existing_task(client):
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == "task-101"
-    assert data["title"] == "Upgrade authentication service to OAuth 2.0"
+    assert data["title"] == "Improve real-time laundry order tracking"
 
 def test_get_missing_task(client):
     response = client.get("/api/tasks/non-existent-id")
@@ -90,7 +90,7 @@ def test_delete_missing_task(client):
     assert response.status_code == 404
 
 def test_search_tasks(client):
-    response = client.get("/api/tasks?search=OAuth")
+    response = client.get("/api/tasks?search=tracking")
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1

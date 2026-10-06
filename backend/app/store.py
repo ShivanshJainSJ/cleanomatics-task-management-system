@@ -9,8 +9,8 @@ def get_initial_tasks():
     return {
         "task-101": {
             "id": "task-101",
-            "title": "Upgrade authentication service to OAuth 2.0",
-            "description": "Migrate legacy token authentication to standard OAuth 2.0 authorization code flow with PKCE.",
+            "title": "Improve real-time laundry order tracking",
+            "description": "Optimize order status updates so customers can see pickup, processing, ready-for-delivery, and delivered stages with minimal delay.",
             "status": "in_progress",
             "priority": "high",
             "dueDate": "2026-10-15T18:00:00Z",
@@ -19,8 +19,8 @@ def get_initial_tasks():
         },
         "task-102": {
             "id": "task-102",
-            "title": "Audit database query performance",
-            "description": "Identify slow database queries in analytics endpoints and add appropriate indexes to reduce response latency.",
+            "title": "Add automated customer pickup notifications",
+            "description": "Trigger SMS, WhatsApp, or push notifications when an order becomes ready for pickup and when the delivery workflow begins.",
             "status": "pending",
             "priority": "medium",
             "dueDate": "2026-10-20T12:00:00Z",
@@ -29,8 +29,8 @@ def get_initial_tasks():
         },
         "task-103": {
             "id": "task-103",
-            "title": "Update API client documentation",
-            "description": "Publish updated OpenAPI specs and code snippets for external developer integration endpoints.",
+            "title": "Update laundry order status API documentation",
+            "description": "Document the order lifecycle, status transitions, request payloads, and response formats for mobile and business applications.",
             "status": "completed",
             "priority": "low",
             "dueDate": "2026-10-05T17:00:00Z",
@@ -39,8 +39,8 @@ def get_initial_tasks():
         },
         "task-104": {
             "id": "task-104",
-            "title": "Implement CSV export for audit logs",
-            "description": "Allow workspace administrators to download historical system action logs as structured CSV files.",
+            "title": "Implement stain detection result processing",
+            "description": "Process garment inspection results from the AI pipeline and store stain type, severity, and recommended treatment information with the laundry order.",
             "status": "pending",
             "priority": "high",
             "dueDate": "2026-10-25T15:00:00Z",
@@ -49,8 +49,8 @@ def get_initial_tasks():
         },
         "task-105": {
             "id": "task-105",
-            "title": "Refactor frontend component styling",
-            "description": "Convert legacy styling tokens to unified Tailwind CSS design primitives across all dashboard views.",
+            "title": "Build franchise branch performance dashboard",
+            "description": "Provide branch-level metrics for orders, revenue, order completion, customer activity, and operational performance.",
             "status": "in_progress",
             "priority": "medium",
             "dueDate": "2026-10-18T16:00:00Z",
