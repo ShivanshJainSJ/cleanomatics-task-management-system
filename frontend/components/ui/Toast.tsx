@@ -25,18 +25,19 @@ export const Toast: React.FC<ToastProps> = ({
   const isSuccess = type === 'success';
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-800 animate-slide-up">
+    <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-3.5 py-2.5 rounded-md shadow-lg border bg-white dark:bg-[#111111] text-light-text dark:text-dark-text border-light-border dark:border-white/10 dark:shadow-glass-dark animate-toast-in">
       {isSuccess ? (
-        <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
       ) : (
-        <AlertCircle className="w-5 h-5 text-rose-500 shrink-0" />
+        <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
       )}
-      <p className="text-sm font-medium">{message}</p>
+      <p className="text-xs font-medium">{message}</p>
       <button
         onClick={onClose}
-        className="ml-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+        className="ml-1.5 p-0.5 text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text rounded"
+        aria-label="Dismiss notification"
       >
-        <X className="w-4 h-4" />
+        <X className="w-3.5 h-3.5" />
       </button>
     </div>
   );

@@ -30,7 +30,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   };
 
   return (
-    <div className="bg-light-card dark:bg-white/[0.035] backdrop-blur-xs border border-light-border dark:border-white/[0.08] dark:shadow-glass-card shadow-subtle-light rounded-lg p-5 flex flex-col justify-between hover:border-neutral-300 dark:hover:border-white/[0.14]">
+    <div className="bg-light-card dark:bg-white/[0.035] backdrop-blur-xs border border-light-border dark:border-white/[0.08] dark:shadow-glass-card shadow-subtle-light rounded-lg p-5 flex flex-col justify-between hover:border-neutral-300 dark:hover:border-white/[0.14] transition-all duration-150 ease-out hover:-translate-y-[1px]">
       <div>
         <div className="mb-2.5">
           <TaskStatusIndicator status={task.status} priority={task.priority} />
@@ -54,7 +54,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         <div className="flex items-center justify-end space-x-2 pt-0.5 text-xs text-light-secondary dark:text-dark-secondary">
           <button
             onClick={() => onView(task)}
-            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover active:scale-95 transition-all duration-150 ease-out"
             title="View Details"
           >
             <Eye className="w-3.5 h-3.5" />
@@ -62,7 +62,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           </button>
           <button
             onClick={() => onEdit(task)}
-            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover active:scale-95 transition-all duration-150 ease-out"
             title="Edit Task"
           >
             <Edit2 className="w-3.5 h-3.5" />
@@ -70,7 +70,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           </button>
           <button
             onClick={() => onDelete(task)}
-            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-950/20"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-950/20 active:scale-95 transition-all duration-150 ease-out"
             title="Delete Task"
           >
             <Trash2 className="w-3.5 h-3.5" />

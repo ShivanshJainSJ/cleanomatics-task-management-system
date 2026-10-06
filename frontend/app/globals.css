@@ -4,8 +4,8 @@
 
 *, *::before, *::after {
   transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 body {
@@ -20,10 +20,10 @@ body {
   color: #F5F5F5;
 }
 
-@keyframes slideUp {
+@keyframes modalIn {
   from {
     opacity: 0;
-    transform: translateY(0.75rem);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -31,6 +31,42 @@ body {
   }
 }
 
-.animate-slide-up {
-  animation: slideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-modal-in {
+  animation: modalIn 220ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-overlay-in {
+  animation: overlayIn 200ms ease-out forwards;
+}
+
+.animate-toast-in {
+  animation: toastIn 200ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

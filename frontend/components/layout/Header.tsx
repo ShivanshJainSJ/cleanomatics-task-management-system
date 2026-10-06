@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center space-x-3">
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-md text-light-secondary hover:text-light-text hover:bg-light-hover dark:text-dark-secondary dark:hover:text-dark-text dark:hover:bg-dark-hover border border-transparent dark:border-dark-border/40"
+            className="p-2 rounded-md text-light-secondary hover:text-light-text hover:bg-light-hover dark:text-dark-secondary dark:hover:text-dark-text dark:hover:bg-dark-hover border border-transparent dark:border-dark-border/40 transition-all duration-150 ease-out active:scale-95"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
