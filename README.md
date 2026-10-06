@@ -38,7 +38,7 @@ The application supports creating, viewing, editing, and deleting tasks, along w
 ## Project Structure
 
 ```text
-Assigment/
+cleanomatics-task-management-system/
 ├── backend/
 │   ├── app/
 │   │   ├── controllers/
@@ -83,8 +83,8 @@ The frontend is organized around reusable components, custom hooks, and a small 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ShivanshJainSJ/Assigment.git
-cd Assigment
+git clone https://github.com/ShivanshJainSJ/cleanomatics-task-management-system.git 
+cd cleanomatics-task-management-system
 ```
 
 ### 2. Backend Setup
@@ -235,7 +235,21 @@ npm run build
 
 ## Screenshots
 
-Screenshots can be added here to show the main dashboard, dark mode, task details, and create/edit forms.
+### Dashboard — Light Mode
+
+![Dashboard Light Mode](docs/screenshots/dashboard-light.png)
+
+### Dashboard — Dark Mode
+
+![Dashboard Dark Mode](docs/screenshots/dashboard-dark.png)
+
+### Task Details
+
+![Task Details](docs/screenshots/task-details.png)
+
+### Create / Edit Task
+
+![Task Form](docs/screenshots/task-form.png)
 
 ## Notes
 
