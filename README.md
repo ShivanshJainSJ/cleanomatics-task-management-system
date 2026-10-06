@@ -1,24 +1,25 @@
 # Cleanomatics Task Management System
 
-A full-stack task management application built for the Cleanomatics Software Engineering Intern assignment. The project consists of a FastAPI backend with in-memory storage and a Next.js frontend built with React, TypeScript, and Tailwind CSS.
+A full-stack task management application built for the Cleanomatics Software Engineering Intern assignment. The project has a FastAPI backend with in-memory storage and a Next.js frontend built with React, TypeScript, and Tailwind CSS.
 
-The application allows users to create, view, edit, and delete tasks, with support for search, filtering, sorting, light and dark themes, and validation handling.
+The application supports creating, viewing, editing, and deleting tasks, along with search, filtering, sorting, validation, and light and dark themes.
 
 ## Features
 
 - Create, view, edit, and delete tasks
 - Task status tracking (`pending`, `in_progress`, `completed`)
 - Task priority levels (`low`, `medium`, `high`)
-- Due date selection and formatted timestamps
-- Search across task titles and descriptions (debounced)
+- Due dates and timestamps
+- Search across task titles and descriptions
 - Filter by status and priority
-- Sort by created date, due date, priority, or title (ascending and descending)
+- Sort by created date, due date, priority, or title
+- Ascending and descending sort order
 - Client-side and server-side validation
-- Centralized error handling returning HTTP 400 for invalid request data
-- Responsive layout for desktop and mobile screens
-- Light and dark mode with persistent user preference
-- Loading skeleton, empty states, and error messaging
-- Interactive OpenAPI documentation via Swagger UI
+- Centralized error handling
+- Responsive layout
+- Light and dark mode
+- Loading, empty, and error states
+- Swagger UI / OpenAPI documentation
 - Automated backend tests with Pytest
 
 ## Tech Stack
@@ -31,8 +32,8 @@ The application allows users to create, view, edit, and delete tasks, with suppo
 | Backend | Python 3.13, FastAPI |
 | Validation | Pydantic v2 |
 | Server | Uvicorn |
-| Storage | In-memory store (Python dictionary) |
-| API Testing | Pytest, HTTPX |
+| Storage | In-memory Python dictionary |
+| Testing | Pytest, HTTPX |
 
 ## Project Structure
 
@@ -66,15 +67,16 @@ Assigment/
 └── README.md
 ```
 
-- **routes**: Declares FastAPI endpoints and query parameters.
-- **controllers**: Coordinates requests, delegates to services, and handles HTTP status codes.
-- **services**: Implements business logic including search, filtering, and sorting.
-- **schemas**: Pydantic models for request validation and response serialization.
-- **middleware**: Intercepts validation errors and converts them to HTTP 400 responses.
-- **store**: In-memory task repository holding records during server runtime.
-- **components**: React components organized into layout, task features, and UI primitives.
-- **hooks**: Custom React hooks for task state, debounced search, and theme switching.
-- **services**: Fetch API client communicating with backend endpoints.
+The backend is separated into a few simple layers:
+
+- **Routes** define the API endpoints and query parameters.
+- **Controllers** handle requests and responses and coordinate with the service layer.
+- **Services** contain the task logic for searching, filtering, sorting, and CRUD operations.
+- **Schemas** define the request and response models using Pydantic.
+- **Middleware** handles request validation and API errors.
+- **Store** keeps the tasks in memory while the server is running.
+
+The frontend is organized around reusable components, custom hooks, and a small API client for communicating with the backend.
 
 ## Getting Started
 
@@ -95,13 +97,15 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-The backend server starts at `http://localhost:8000`.
+The backend will be available at:
 
-The `backend/.env.example` file outlines optional environment variables (`PORT`, `HOST`, `CORS_ORIGINS`). For local development, default values work without creating a `.env` file.
+`http://localhost:8000`
+
+For local development, the default configuration can be used without creating a `.env` file. Optional settings are documented in `backend/.env.example`.
 
 ### 3. Frontend Setup
 
-In a new terminal:
+Open a new terminal:
 
 ```bash
 cd frontend
@@ -109,9 +113,13 @@ npm install
 npm run dev
 ```
 
-The frontend application starts at `http://localhost:3000`.
+The frontend will be available at:
 
-The frontend defaults to connecting to `http://localhost:8000`. If running on a different port or host, set `NEXT_PUBLIC_API_URL` in `frontend/.env.local` as indicated in `frontend/.env.example`.
+`http://localhost:3000`
+
+By default, the frontend connects to the backend at `http://localhost:8000`.
+
+To use a different backend URL, set `NEXT_PUBLIC_API_URL` in `frontend/.env.local`.
 
 ## Running the Application
 
@@ -124,100 +132,119 @@ The frontend defaults to connecting to `http://localhost:8000`. If running on a 
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| `GET` | `/api/tasks` | List tasks (supports `search`, `status`, `priority`, `sort_by`, `sort_order`) |
-| `GET` | `/api/tasks/{id}` | Get one task |
+| `GET` | `/api/tasks` | List tasks |
+| `GET` | `/api/tasks/{id}` | Get a single task |
 | `POST` | `/api/tasks` | Create a task |
 | `PUT` | `/api/tasks/{id}` | Update a task |
 | `DELETE` | `/api/tasks/{id}` | Delete a task |
-| `GET` | `/health` | Server health check |
+| `GET` | `/health` | Health check |
 
-Supported query parameters for `GET /api/tasks`:
-- `search`: Matches query string against title and description (case-insensitive)
-- `status`: Filter by `pending`, `in_progress`, or `completed`
-- `priority`: Filter by `low`, `medium`, or `high`
-- `sort_by`: Field to sort by (`createdAt`, `dueDate`, `priority`, `title`; defaults to `createdAt`)
-- `sort_order`: Direction of sorting (`asc` or `desc`; defaults to `desc`)
+### GET /api/tasks
+
+The task list endpoint supports the following query parameters:
+
+| Parameter | Purpose |
+|---|---|
+| `search` | Search title and description |
+| `status` | Filter by task status |
+| `priority` | Filter by priority |
+| `sort_by` | Sort by `createdAt`, `dueDate`, `priority`, or `title` |
+| `sort_order` | Sort using `asc` or `desc` |
+
+Search is case-insensitive.
 
 ## Task Model
 
 Each task contains:
-- `id`: Unique identifier (string UUID)
-- `title`: Task title (string, 1–200 characters, non-empty)
-- `description`: Detailed task description (string, non-empty)
-- `status`: Current status (`pending`, `in_progress`, `completed`)
-- `priority`: Priority level (`low`, `medium`, `high`)
-- `dueDate`: Due date string (required, non-empty)
-- `createdAt`: ISO 8601 creation timestamp
-- `updatedAt`: ISO 8601 update timestamp
 
-The application starts with 5 sample tasks so the dashboard has usable data on first launch. These tasks are included for demonstration and testing purposes.
+- `id` — unique task identifier
+- `title` — task title
+- `description` — task description
+- `status` — `pending`, `in_progress`, or `completed`
+- `priority` — `low`, `medium`, or `high`
+- `dueDate` — required due date
+- `createdAt` — creation timestamp
+- `updatedAt` — last update timestamp
+
+The application starts with five sample tasks so the dashboard has usable data when it first launches. These tasks are included for demonstration and testing.
 
 ## Validation and Error Handling
 
-- `title`, `description`, and `dueDate` are required fields; empty values and strings containing only whitespace are rejected.
-- `status` and `priority` must match valid enum values.
-- FastAPI's default 422 response for `RequestValidationError` is intercepted by custom middleware in `app/middleware/error_handler.py` and returned as HTTP 400 Bad Request to match assignment specifications.
-- Missing task IDs return HTTP 404 with a descriptive error message.
-- Unexpected server exceptions return HTTP 500 without leaking stack traces.
+The backend validates incoming task data before processing requests.
+
+- `title`, `description`, and `dueDate` are required.
+- Empty or whitespace-only values are rejected.
+- `status` and `priority` must use valid values.
+- Invalid request data returns HTTP `400`.
+- Requests for a task that does not exist return HTTP `404`.
+- Unexpected server errors return HTTP `500`.
 
 ## Frontend
 
-The user interface includes:
-- Task metrics overview (Total, Pending, In Progress, Completed counters)
-- Filter bar with debounced search input, status filter, priority filter, and sort controls
-- Responsive task card grid with status dot indicator, priority, due date, and creation date
-- Create and edit modal forms with field validation and clear error feedback
-- Dedicated task details modal with full metadata and action shortcuts
-- Delete confirmation modal before task removal
-- Loading skeleton, empty state, and error handling with toast notifications
-- Light and dark mode support with localStorage persistence
+The frontend provides:
+
+- Task summary counters
+- Search, filtering, and sorting
+- Responsive task cards
+- Create and edit forms
+- Task details view
+- Delete confirmation
+- Loading and empty states
+- Error handling
+- Light and dark themes
 
 ## Backend Architecture
 
-The backend follows a layered structure to maintain separation of concerns:
-- Routes declare API endpoints and query parameters.
-- Controllers validate and format inputs, coordinate requests, and handle HTTP status codes.
-- Services implement query logic such as searching, filtering, and sorting.
-- The in-memory task store keeps records in a Python dictionary during the process lifetime.
+The backend uses a simple layered structure:
 
-This separation keeps business logic decoupled from FastAPI transport code and makes endpoints straightforward to test.
+```text
+Request
+   ↓
+Route
+   ↓
+Controller
+   ↓
+Service
+   ↓
+In-memory Store
+```
+
+Keeping the API routes separate from the task logic makes the code easier to read and test.
+
+The store is intentionally in-memory because persistent database storage was not required for the assignment.
 
 ## Testing
 
-Run backend tests using pytest:
+Run the backend tests with:
 
 ```bash
 cd backend
 python -m pytest tests
 ```
 
-The test suite runs 13 tests covering task listing, search, filtering, sorting, retrieval, creation, validation handling (HTTP 400), updates, deletion, and 404 error cases.
+The test suite covers task listing, search, filtering, sorting, retrieval, creation, validation, updates, deletion, and missing-task errors.
 
 ## Build
 
-To verify the frontend production build:
+To create a production build of the frontend:
 
 ```bash
 cd frontend
 npm run build
 ```
 
-This compiles TypeScript and generates static pages without errors.
-
 ## Screenshots
 
-Screenshots can be added here before submission:
-- Dashboard overview (Light and Dark mode)
-- Task creation and edit modal
-- Task details modal
-- Delete confirmation dialog
+Screenshots can be added here to show the main dashboard, dark mode, task details, and create/edit forms.
 
 ## Notes
 
-The application uses in-memory storage because persistent database storage was not required for the assignment. Restarting the backend server resets task data back to the initial sample tasks.
+Task data is stored only in memory. Restarting the backend resets the application to the initial sample tasks.
 
 ## Author
 
-Shivansh Jain
-- GitHub: [https://github.com/ShivanshJainSJ](https://github.com/ShivanshJainSJ)
-- LinkedIn: [https://linkedin.com/in/shivansh-jain-sj](https://linkedin.com/in/shivansh-jain-sj)
+**Shivansh Jain**
+
+- GitHub: https://github.com/ShivanshJainSJ
+- LinkedIn: https://linkedin.com/in/shivansh-jain-sj
+```
