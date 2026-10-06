@@ -2,7 +2,7 @@
 
 A full-stack task management application built for the Cleanomatics Software Engineering Intern assignment. The project consists of a FastAPI backend with in-memory storage and a Next.js frontend built with React, TypeScript, and Tailwind CSS.
 
-The application allows users to create, view, edit, and delete tasks, with support for search, filtering, multi-field sorting, light and dark themes, and validation handling.
+The application allows users to create, view, edit, and delete tasks, with support for search, filtering, sorting, light and dark themes, and validation handling.
 
 ## Features
 
@@ -150,7 +150,7 @@ Each task contains:
 - `createdAt`: ISO 8601 creation timestamp
 - `updatedAt`: ISO 8601 update timestamp
 
-The application initializes with 5 mock tasks reflecting laundry technology operations (order tracking, pickup notifications, status API documentation, stain detection processing, and branch performance dashboards). These are sample tasks provided for testing and demonstration purposes.
+The application starts with 5 sample tasks so the dashboard has usable data on first launch. These tasks are included for demonstration and testing purposes.
 
 ## Validation and Error Handling
 
