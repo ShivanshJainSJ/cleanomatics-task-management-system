@@ -18,26 +18,26 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full">
         {label ? (
-          <label htmlFor={selectId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+          <label htmlFor={selectId} className="block text-xs font-medium text-light-secondary dark:text-dark-secondary mb-1">
             {label}
           </label>
         ) : null}
         <select
           id={selectId}
           ref={ref}
-          className={`w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border ${
-            error ? 'border-rose-500 focus:ring-rose-500' : 'border-slate-300 dark:border-slate-700 focus:ring-sky-500'
-          } rounded-md text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 transition-colors ${className}`}
+          className={`w-full px-3 py-1.5 text-xs bg-white dark:bg-neutral-900 border ${
+            error ? 'border-rose-500 focus:ring-rose-500' : 'border-light-border dark:border-dark-border focus:ring-sky-500'
+          } rounded-md text-light-text dark:text-dark-text focus:outline-none focus:ring-1 transition-colors ${className}`}
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
+            <option key={opt.value} value={opt.value} className="bg-white dark:bg-neutral-900 text-light-text dark:text-dark-text">
               {opt.label}
             </option>
           ))}
         </select>
         {error ? (
-          <p className="mt-1 text-xs text-rose-600 dark:text-rose-400">{error}</p>
+          <p className="mt-1 text-xs text-rose-500">{error}</p>
         ) : null}
       </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
+import { Search, ArrowUp, ArrowDown } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 
@@ -50,16 +50,16 @@ export const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-4 mb-6 space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 items-center">
+    <div className="bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border dark:shadow-glass-card shadow-subtle-light rounded-lg p-3.5 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 items-center">
         <div className="relative col-span-1 sm:col-span-2 md:col-span-1">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-light-muted dark:text-dark-muted pointer-events-none" />
           <Input
             type="text"
             placeholder="Search tasks..."
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-9"
+            className="pl-9 text-xs py-1.5"
           />
         </div>
 
@@ -67,12 +67,14 @@ export const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
           options={statusOptions}
           value={statusFilter}
           onChange={(e) => onStatusChange(e.target.value)}
+          className="text-xs py-1.5"
         />
 
         <Select
           options={priorityOptions}
           value={priorityFilter}
           onChange={(e) => onPriorityChange(e.target.value)}
+          className="text-xs py-1.5"
         />
 
         <div className="flex items-center space-x-2">
@@ -81,14 +83,16 @@ export const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
               options={sortOptions}
               value={sortBy}
               onChange={(e) => onSortByChange(e.target.value)}
+              className="text-xs py-1.5"
             />
           </div>
           <button
             onClick={onSortOrderToggle}
-            className="p-2 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors shrink-0"
+            className="p-2 border border-light-border dark:border-dark-border rounded-md hover:bg-light-hover dark:hover:bg-dark-hover text-light-secondary dark:text-dark-secondary shrink-0"
             title={`Sort ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
+            aria-label={`Sort ${sortOrder === 'asc' ? 'Ascending' : 'Descending'}`}
           >
-            {sortOrder === 'asc' ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+            {sortOrder === 'asc' ? <ArrowUp className="w-3.5 h-3.5" /> : <ArrowDown className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>

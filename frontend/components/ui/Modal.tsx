@@ -45,22 +45,23 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4 text-center">
         <div
-          className="fixed inset-0 bg-slate-900/50 transition-opacity"
+          className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity"
           onClick={onClose}
         />
 
         <div
-          className={`w-full ${maxWidthClasses[maxWidth]} transform overflow-hidden rounded-lg bg-white dark:bg-slate-900 p-6 text-left align-middle shadow-lg transition-all border border-slate-200 dark:border-slate-800 z-10`}
+          className={`w-full ${maxWidthClasses[maxWidth]} transform overflow-hidden rounded-lg bg-white dark:bg-[#111111] p-6 text-left align-middle shadow-xl transition-all border border-light-border dark:border-white/10 dark:shadow-glass-dark z-10`}
         >
-          <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-light-border dark:border-white/10">
+            <h3 className="text-sm font-semibold text-light-text dark:text-dark-text tracking-tight">
               {title}
             </h3>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-slate-300 focus:outline-none"
+              className="rounded p-1 text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-white/5 focus:outline-none"
+              aria-label="Close modal"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4" />
             </button>
           </div>
           <div>{children}</div>

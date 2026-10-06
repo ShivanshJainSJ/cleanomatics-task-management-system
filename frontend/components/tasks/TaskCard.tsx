@@ -1,7 +1,7 @@
 import React from 'react';
 import { Task } from '@/types/task';
-import { StatusBadge, PriorityBadge } from '@/components/ui/Badge';
-import { Calendar, Eye, Edit2, Trash2, Clock } from 'lucide-react';
+import { TaskStatusIndicator } from '@/components/ui/Badge';
+import { Eye, Edit2, Trash2 } from 'lucide-react';
 
 interface TaskCardProps {
   task: Task;
@@ -30,57 +30,51 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-4 transition-colors flex flex-col justify-between h-full">
+    <div className="bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border dark:shadow-glass-card shadow-subtle-light rounded-lg p-5 flex flex-col justify-between hover:border-neutral-300 dark:hover:border-white/15">
       <div>
-        <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex items-center space-x-2 wrap">
-            <StatusBadge status={task.status} />
-            <PriorityBadge priority={task.priority} />
-          </div>
+        <div className="mb-2.5">
+          <TaskStatusIndicator status={task.status} priority={task.priority} />
         </div>
 
-        <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-2 line-clamp-1">
+        <h3 className="text-sm font-semibold text-light-text dark:text-dark-text mb-2 line-clamp-1 leading-snug">
           {task.title}
         </h3>
 
-        <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-xs text-light-secondary dark:text-dark-secondary mb-4 line-clamp-2 leading-relaxed">
           {task.description}
         </p>
       </div>
 
-      <div className="pt-3 border-t border-slate-100 dark:border-slate-800/60 mt-2">
-        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-3">
-          <div className="flex items-center space-x-1" title="Due Date">
-            <Calendar className="w-3.5 h-3.5 text-slate-400" />
-            <span>Due: {formatDate(task.dueDate)}</span>
-          </div>
-          <div className="flex items-center space-x-1" title="Created Date">
-            <Clock className="w-3.5 h-3.5 text-slate-400" />
-            <span>Created: {formatDate(task.createdAt)}</span>
-          </div>
+      <div className="pt-3 border-t border-light-border dark:border-dark-border/60 mt-1">
+        <div className="flex items-center justify-between text-[11px] text-light-muted dark:text-dark-muted mb-3">
+          <span>Due {formatDate(task.dueDate)}</span>
+          <span>Created {formatDate(task.createdAt)}</span>
         </div>
 
-        <div className="flex items-center justify-end space-x-1 pt-1">
+        <div className="flex items-center justify-end space-x-2 pt-0.5 text-xs text-light-secondary dark:text-dark-secondary">
           <button
             onClick={() => onView(task)}
-            className="p-1.5 text-slate-500 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-950/40 rounded-md transition-colors"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
             title="View Details"
           >
-            <Eye className="w-4 h-4" />
+            <Eye className="w-3.5 h-3.5" />
+            <span>View</span>
           </button>
           <button
             onClick={() => onEdit(task)}
-            className="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/40 rounded-md transition-colors"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-light-text dark:hover:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
             title="Edit Task"
           >
-            <Edit2 className="w-4 h-4" />
+            <Edit2 className="w-3.5 h-3.5" />
+            <span>Edit</span>
           </button>
           <button
             onClick={() => onDelete(task)}
-            className="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-md transition-colors"
+            className="inline-flex items-center space-x-1 px-2 py-1 rounded hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-950/20"
             title="Delete Task"
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Delete</span>
           </button>
         </div>
       </div>

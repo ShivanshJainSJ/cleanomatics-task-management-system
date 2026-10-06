@@ -40,7 +40,7 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
       setDescription(taskToEdit.description);
       setStatus(taskToEdit.status);
       setPriority(taskToEdit.priority);
-      
+
       try {
         const formattedDate = new Date(taskToEdit.dueDate).toISOString().slice(0, 16);
         setDueDate(formattedDate);
@@ -52,7 +52,7 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
       setDescription('');
       setStatus('pending');
       setPriority('medium');
-      
+
       const defaultDate = new Date();
       defaultDate.setDate(defaultDate.getDate() + 7);
       setDueDate(defaultDate.toISOString().slice(0, 16));
@@ -129,7 +129,7 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
       title={taskToEdit ? 'Edit Task' : 'Create New Task'}
       maxWidth="lg"
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3.5">
         <Input
           label="Title *"
           placeholder="e.g. Audit database query performance"
@@ -142,27 +142,27 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
         />
 
         <div className="w-full">
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+          <label className="block text-xs font-medium text-light-secondary dark:text-dark-secondary mb-1">
             Description *
           </label>
           <textarea
-            rows={4}
+            rows={3}
             placeholder="Detailed overview of what needs to be done..."
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);
               if (errors.description) setErrors((prev) => ({ ...prev, description: undefined }));
             }}
-            className={`w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border ${
-              errors.description ? 'border-rose-500' : 'border-slate-300 dark:border-slate-700'
-            } rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors`}
+            className={`w-full px-3 py-1.5 text-xs bg-white dark:bg-white/5 border ${
+              errors.description ? 'border-rose-500 focus:ring-rose-500' : 'border-light-border dark:border-dark-border focus:ring-sky-500'
+            } rounded-md text-light-text dark:text-dark-text placeholder-light-muted dark:placeholder-dark-muted focus:outline-none focus:ring-1 transition-colors`}
           />
           {errors.description ? (
-            <p className="mt-1 text-xs text-rose-600 dark:text-rose-400">{errors.description}</p>
+            <p className="mt-1 text-xs text-rose-500">{errors.description}</p>
           ) : null}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Select
             label="Status"
             options={statusOptions}
@@ -189,11 +189,11 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
           error={errors.dueDate}
         />
 
-        <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <Button type="button" variant="outline" onClick={onClose}>
+        <div className="flex items-center justify-end space-x-2.5 pt-3.5 border-t border-light-border dark:border-white/10">
+          <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button type="submit" size="sm" isLoading={isSubmitting}>
             {taskToEdit ? 'Save Changes' : 'Create Task'}
           </Button>
         </div>
