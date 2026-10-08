@@ -25,11 +25,13 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
   const [status, setStatus] = useState<TaskStatus>('pending');
   const [priority, setPriority] = useState<TaskPriority>('medium');
   const [dueDate, setDueDate] = useState('');
+  const [dueTime, setDueTime] = useState('18:00');
 
   const [errors, setErrors] = useState<{
     title?: string;
     description?: string;
     dueDate?: string;
+    dueTime?: string;
   }>({});
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,10 +44,22 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
       setPriority(taskToEdit.priority);
 
       try {
-        const formattedDate = new Date(taskToEdit.dueDate).toISOString().slice(0, 16);
-        setDueDate(formattedDate);
+        const d = new Date(taskToEdit.dueDate);
+        if (!isNaN(d.getTime())) {
+          const year = d.getFullYear();
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const day = String(d.getDate()).padStart(2, '0');
+          const hours = String(d.getHours()).padStart(2, '0');
+          const minutes = String(d.getMinutes()).padStart(2, '0');
+          setDueDate(`${year}-${month}-${day}`);
+          setDueTime(`${hours}:${minutes}`);
+        } else {
+          setDueDate('');
+          setDueTime('18:00');
+        }
       } catch {
-        setDueDate(taskToEdit.dueDate);
+        setDueDate('');
+        setDueTime('18:00');
       }
     } else {
       setTitle('');
@@ -55,13 +69,17 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
 
       const defaultDate = new Date();
       defaultDate.setDate(defaultDate.getDate() + 7);
-      setDueDate(defaultDate.toISOString().slice(0, 16));
+      const year = defaultDate.getFullYear();
+      const month = String(defaultDate.getMonth() + 1).padStart(2, '0');
+      const day = String(defaultDate.getDate()).padStart(2, '0');
+      setDueDate(`${year}-${month}-${day}`);
+      setDueTime('18:00');
     }
     setErrors({});
   }, [taskToEdit, isOpen]);
 
   const validate = () => {
-    const newErrors: { title?: string; description?: string; dueDate?: string } = {};
+    const newErrors: { title?: string; description?: string; dueDate?: string; dueTime?: string } = {};
 
     if (!title.trim()) {
       newErrors.title = 'Title is required';
@@ -73,6 +91,10 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
 
     if (!dueDate) {
       newErrors.dueDate = 'Due date is required';
+    }
+
+    if (!dueTime) {
+      newErrors.dueTime = 'Due time is required';
     }
 
     setErrors(newErrors);
@@ -87,11 +109,14 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
     }
 
     setIsSubmitting(true);
-    let isoDueDate = dueDate;
+    let isoDueDate = '';
     try {
-      isoDueDate = new Date(dueDate).toISOString();
+      const [year, month, day] = dueDate.split('-').map(Number);
+      const [hours, minutes] = (dueTime || '18:00').split(':').map(Number);
+      const localDate = new Date(year, month - 1, day, hours, minutes, 0);
+      isoDueDate = !isNaN(localDate.getTime()) ? localDate.toISOString() : `${dueDate}T${dueTime || '18:00'}:00.000Z`;
     } catch {
-      isoDueDate = dueDate;
+      isoDueDate = `${dueDate}T${dueTime || '18:00'}:00.000Z`;
     }
 
     const payload: TaskPayload = {
@@ -178,16 +203,29 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
           />
         </div>
 
-        <Input
-          label="Due Date *"
-          type="datetime-local"
-          value={dueDate}
-          onChange={(e) => {
-            setDueDate(e.target.value);
-            if (errors.dueDate) setErrors((prev) => ({ ...prev, dueDate: undefined }));
-          }}
-          error={errors.dueDate}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Input
+            label="Due Date *"
+            type="date"
+            value={dueDate}
+            onChange={(e) => {
+              setDueDate(e.target.value);
+              if (errors.dueDate) setErrors((prev) => ({ ...prev, dueDate: undefined }));
+            }}
+            error={errors.dueDate}
+          />
+
+          <Input
+            label="Due Time *"
+            type="time"
+            value={dueTime}
+            onChange={(e) => {
+              setDueTime(e.target.value);
+              if (errors.dueTime) setErrors((prev) => ({ ...prev, dueTime: undefined }));
+            }}
+            error={errors.dueTime}
+          />
+        </div>
 
         <div className="flex items-center justify-end space-x-2.5 pt-3.5 border-t border-light-border dark:border-white/10">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
